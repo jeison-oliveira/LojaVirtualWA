@@ -53,7 +53,7 @@ describe('Produto Service', () => {
    * cadastrar manualmente um produto no banco de dados via interface MySQL
    * ou via API, mas lembrar de alterar o banco de dados para apontar para bd de teste
    */
-  it('should get specific product', async () => {
+  it.skip('should get specific product', async () => {
     /**
      *  [
           {
@@ -81,6 +81,8 @@ describe('Produto Service', () => {
 
     console.log(res.status);
     console.log(res.body);
+
+    expect(res.statusCode).toEqual(200);
 
     /** Sempre retorna um array */
     expect(res.body).toEqual({
