@@ -8,6 +8,7 @@ import {
 } from '../usuario/usuario.service';
 
 const login = async (req: Request, res: Response) => {
+  console.log("chegou aqui");
   const { email, senha } = req.body;
   try {
     const usuario = await checkAuth({ email, senha });
