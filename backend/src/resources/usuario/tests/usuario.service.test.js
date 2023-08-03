@@ -8,7 +8,7 @@ describe('Usuario Service', () => {
     await server.bootstrap();
   });
 
-  it.skip('should create new user', async () => {
+  it('should create new user', async () => {
     const randomEmailNumber = Math.random().toFixed(10);
 
     const res = await request(server.server)

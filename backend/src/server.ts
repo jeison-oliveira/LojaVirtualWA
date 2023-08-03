@@ -46,7 +46,7 @@ export class Api {
       await this.migrations();
       await this.seeds();
     } catch (err) {
-      console.error(err);
+      //console.error(err);
     }
 
     return this;
@@ -78,7 +78,7 @@ export class Api {
         this.server.listen(api.defaultPort);
       }
     } catch (err) {
-      console.error(err);
+      //console.error(err);
       throw error;
     }
   }
@@ -87,15 +87,15 @@ export class Api {
     await connection
       .authenticate()
       .then(async () => {
-        console.info('MySQL DB Conectado!');
+        //console.info('MySQL DB Conectado!');
         await connection.addModels(models);
         await connection.sync();
       })
       .then(() => {
-        console.info('DB sync!');
+        //console.info('DB sync!');
       })
       .catch((err) => {
-        console.error(err);
+        //console.error(err);
         throw error;
       });
   }
@@ -104,9 +104,9 @@ export class Api {
     const versaoDB = await VersaoDB.findByPk(api.db.id);
     const schemaVersaoAtualBanco = versaoDB == null ? 0 : versaoDB.schemaVersao;
 
-    console.info(`VERSAO DO ESQUEMA DO BANCO: ${schemaVersaoAtualBanco}`);
+    //console.info(`VERSAO DO ESQUEMA DO BANCO: ${schemaVersaoAtualBanco}`);
     if (schemaVersaoAtualBanco < api.db.schemaVersion) {
-      console.info(migracoes);
+      //console.info(migracoes);
       const models: string[] = [];
 
       for (let i = schemaVersaoAtualBanco; i < api.db.schemaVersion; i++) {
@@ -115,12 +115,12 @@ export class Api {
         if (migracao && migracao.consultas) {
           if (migracao.consultas !== null) {
             for (const consulta of migracao.consultas) {
-              console.info('executando: ' + consulta.query);
+              //console.info('executando: ' + consulta.query);
               if (models.indexOf(consulta.model) < 0) {
                 await connection.query(consulta.query);
-                console.info('- executed!');
+                //console.info('- executed!');
               } else {
-                console.info('- not executed: new model.');
+                //console.info('- not executed: new model.');
               }
             }
           }
@@ -142,10 +142,10 @@ export class Api {
     await connection
       .sync()
       .then(() => {
-        console.info('Models sync!');
+        //console.info('Models sync!');
       })
       .catch((error) => {
-        console.error(error);
+        //console.error(error);
       });
   }
 
@@ -154,9 +154,9 @@ export class Api {
 
     const seedVersaoAtualBanco = versaoDB == null ? 0 : versaoDB.seedVersao;
 
-    console.info(`VERSAO DOS DADOS: ${seedVersaoAtualBanco}`);
+    //console.info(`VERSAO DOS DADOS: ${seedVersaoAtualBanco}`);
     if (seedVersaoAtualBanco < api.db.seedVersion) {
-      console.info(seeds);
+      //console.info(seeds);
       const models: string[] = [];
 
       for (let i = seedVersaoAtualBanco; i < api.db.seedVersion; i++) {
@@ -165,12 +165,12 @@ export class Api {
         if (seed && seed.inserts) {
           if (seed.inserts !== null) {
             for (const insert of seed.inserts) {
-              console.info('executando: ' + insert.query);
+              //console.info('executando: ' + insert.query);
               if (models.indexOf(insert.model) < 0) {
                 await connection.query(insert.query);
-                console.info('  executed!');
+                //console.info('  executed!');
               } else {
-                console.info('  not executed: new model.');
+                //console.info('  not executed: new model.');
               }
             }
           }
@@ -192,10 +192,10 @@ export class Api {
     await connection
       .sync()
       .then(() => {
-        console.info('Models sync!');
+        //console.info('Models sync!');
       })
       .catch((error) => {
-        console.error(error);
+        //console.error(error);
       });
   }
 }

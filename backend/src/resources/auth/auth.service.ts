@@ -16,6 +16,6 @@ export const checkAuth = async (
 export const checkIsAdmin = async (id: string): Promise<boolean> => {
   const usuario = await Usuario.findOne({ where: { id } });
   if (!usuario) return false;
-  console.log(usuario.tipoUsuarioId, TiposUsuarios.ADMIN);
+  //console.log(usuario.tipoUsuarioId, TiposUsuarios.ADMIN);
   return usuario.tipoUsuarioId === TiposUsuarios.ADMIN;
 };
